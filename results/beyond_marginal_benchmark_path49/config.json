@@ -1,0 +1,35 @@
+{
+  "scenarios": [
+    "a_scale",
+    "b_dynamics"
+  ],
+  "model_families": [
+    "logistic",
+    "random_forest"
+  ],
+  "replications": 20,
+  "n_paths": [
+    10,
+    5,
+    5
+  ],
+  "n_steps": 3000,
+  "window_size": 50,
+  "p_switch": 0.002,
+  "trees": 200,
+  "shuffle_repeats": 3,
+  "block_size": 5,
+  "base_seed": 20260915,
+  "representations": [
+    "b1",
+    "b2",
+    "b3",
+    "signature",
+    "b3_signature",
+    "shuffled_signature",
+    "block_shuffled_signature"
+  ],
+  "preprocessing": "RobustScaler plus fixed tail clipping, fit on training paths only",
+  "selection": "hyperparameter selected by validation balanced accuracy",
+  "test_policy": "test evaluated once after selection"
+}

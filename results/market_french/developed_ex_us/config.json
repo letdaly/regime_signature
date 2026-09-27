@@ -1,0 +1,69 @@
+{
+  "experiment": "market_french",
+  "data": {
+    "market": "developed_ex_us",
+    "label": "Developed ex US",
+    "source": "data/french/Developed_ex_US_3_Factors_Daily_CSV.zip",
+    "sha256": "5f647815369bfc67c01cc17c866e6fc2235cc26a7545331b48f93ca41f1e55ea",
+    "raw_first_date": "1990-07-02",
+    "raw_last_date": "2026-07-31",
+    "sample_first_date": "1990-07-02",
+    "sample_last_date": "2025-12-31",
+    "observations": 9263
+  },
+  "sample_start": "1990-07-01",
+  "sample_end": "2025-12-31",
+  "first_test_year": 2005,
+  "last_test_year": 2025,
+  "window_size": 50,
+  "horizon": 21,
+  "embargo": 21,
+  "validation_years": 3,
+  "minimum_train_windows": 1000,
+  "har_lags": [
+    1,
+    5,
+    22
+  ],
+  "signature_level": 3,
+  "signature_path": "origin_anchored_w_increments",
+  "cells": {
+    "hmm": [
+      "hmm"
+    ],
+    "statistics": [
+      "statistics"
+    ],
+    "statistics_logsig": [
+      "statistics",
+      "logsig"
+    ],
+    "statistics_rawsig": [
+      "statistics",
+      "rawsig"
+    ],
+    "b3": [
+      "b3"
+    ],
+    "b3_logsig": [
+      "b3",
+      "logsig"
+    ],
+    "b3_rawsig": [
+      "b3",
+      "rawsig"
+    ]
+  },
+  "learners": [
+    "random_forest",
+    "logistic",
+    "gbm"
+  ],
+  "trees": 200,
+  "refit_on_full_window": true,
+  "bootstrap_block": 21.0,
+  "bootstrap_resamples": 2000,
+  "sharpe_resamples": 1000,
+  "leverage_cap": 2.0,
+  "seed": 20260922
+}

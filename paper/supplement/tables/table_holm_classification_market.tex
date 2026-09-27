@@ -1,0 +1,41 @@
+\begin{tabular}{@{}lllcccc@{}}
+\toprule
+Design / market & Learner & Contrast & Gain [95\% CI] & $p$ & $p_{\mathrm{Holm}}^{\mathrm{family}}$ & $p_{\mathrm{Holm}}^{\mathrm{all}}$ \\
+\midrule
+\multicolumn{7}{@{}l}{\textit{Panel A. Simulated classification (family of 24)}} \\
+Design A & Logit & Statistics $\to$ + log-sig. & \textbf{\boldmath +0.83 [0.68, 0.97]} & $<$0.001 & $<$0.001 & $<$0.001 \\
+Design A & Logit & Statistics $\to$ + raw sig. & \textbf{\boldmath +1.30 [1.09, 1.52]} & $<$0.001 & $<$0.001 & $<$0.001 \\
+Design A & Logit & B3 $\to$ + log-sig. & \textbf{\boldmath +0.49 [0.37, 0.61]} & $<$0.001 & $<$0.001 & $<$0.001 \\
+Design A & Logit & B3 $\to$ + raw sig. & \textbf{\boldmath +1.04 [0.87, 1.20]} & $<$0.001 & $<$0.001 & $<$0.001 \\
+Design A & RF & Statistics $\to$ + log-sig. & \textbf{\boldmath +0.47 [0.39, 0.56]} & $<$0.001 & $<$0.001 & $<$0.001 \\
+Design A & RF & Statistics $\to$ + raw sig. & \textbf{\boldmath +0.86 [0.73, 0.99]} & $<$0.001 & $<$0.001 & $<$0.001 \\
+Design A & RF & B3 $\to$ + log-sig. & \textbf{\boldmath +0.19 [0.11, 0.27]} & $<$0.001 & $<$0.001 & 0.002 \\
+Design A & RF & B3 $\to$ + raw sig. & \textbf{\boldmath +0.56 [0.46, 0.67]} & $<$0.001 & $<$0.001 & $<$0.001 \\
+Design A & GBM & Statistics $\to$ + log-sig. & \textbf{\boldmath +0.74 [0.63, 0.86]} & $<$0.001 & $<$0.001 & $<$0.001 \\
+Design A & GBM & Statistics $\to$ + raw sig. & \textbf{\boldmath +0.85 [0.71, 0.99]} & $<$0.001 & $<$0.001 & $<$0.001 \\
+Design A & GBM & B3 $\to$ + log-sig. & \textbf{\boldmath +0.42 [0.34, 0.49]} & $<$0.001 & $<$0.001 & $<$0.001 \\
+Design A & GBM & B3 $\to$ + raw sig. & \textbf{\boldmath +0.49 [0.40, 0.57]} & $<$0.001 & $<$0.001 & $<$0.001 \\
+Design B & Logit & Statistics $\to$ + log-sig. & \textbf{\boldmath +1.88 [1.59, 2.17]} & $<$0.001 & $<$0.001 & $<$0.001 \\
+Design B & Logit & Statistics $\to$ + raw sig. & \textbf{\boldmath +4.53 [4.07, 4.99]} & $<$0.001 & $<$0.001 & $<$0.001 \\
+Design B & Logit & B3 $\to$ + log-sig. & \textbf{\boldmath +1.45 [1.23, 1.67]} & $<$0.001 & $<$0.001 & $<$0.001 \\
+Design B & Logit & B3 $\to$ + raw sig. & \textbf{\boldmath +4.06 [3.70, 4.42]} & $<$0.001 & $<$0.001 & $<$0.001 \\
+Design B & RF & Statistics $\to$ + log-sig. & \textbf{\boldmath +1.16 [0.88, 1.44]} & $<$0.001 & $<$0.001 & $<$0.001 \\
+Design B & RF & Statistics $\to$ + raw sig. & \textbf{\boldmath +1.28 [0.94, 1.62]} & $<$0.001 & $<$0.001 & $<$0.001 \\
+Design B & RF & B3 $\to$ + log-sig. & \textbf{\boldmath +0.35 [0.18, 0.53]} & $<$0.001 & $<$0.001 & 0.009 \\
+Design B & RF & B3 $\to$ + raw sig. & \textbf{\boldmath +0.41 [0.22, 0.60]} & $<$0.001 & $<$0.001 & 0.004 \\
+Design B & GBM & Statistics $\to$ + log-sig. & \textbf{\boldmath +1.44 [1.20, 1.68]} & $<$0.001 & $<$0.001 & $<$0.001 \\
+Design B & GBM & Statistics $\to$ + raw sig. & \textbf{\boldmath +1.46 [1.20, 1.71]} & $<$0.001 & $<$0.001 & $<$0.001 \\
+Design B & GBM & B3 $\to$ + log-sig. & \textbf{\boldmath +0.48 [0.33, 0.63]} & $<$0.001 & $<$0.001 & $<$0.001 \\
+Design B & GBM & B3 $\to$ + raw sig. & \textbf{\boldmath +0.53 [0.37, 0.69]} & $<$0.001 & $<$0.001 & $<$0.001 \\
+\addlinespace
+\multicolumn{7}{@{}l}{\textit{Panel B. Market forecasts, validation-selected learner (family of 8)}} \\
+United States & Selected & Statistics $\to$ + log-sig. & +2.13 [$-0.68$, 4.88] & 0.138 & 0.550 & 1.000 \\
+United States & Selected & Statistics $\to$ + raw sig. & \textbf{\boldmath +3.68 [1.36, 6.03]} & 0.003 & 0.021 & 0.114 \\
+United States & Selected & B3 $\to$ + log-sig. & \textbf{\boldmath +3.60 [1.30, 5.98]} & 0.002 & 0.012 & 0.060 \\
+United States & Selected & B3 $\to$ + raw sig. & \textbf{\boldmath +3.72 [0.94, 6.31]} & 0.007 & 0.045 & 0.277 \\
+Developed ex US & Selected & Statistics $\to$ + log-sig. & +1.32 [$-1.19$, 3.84] & 0.287 & 0.862 & 1.000 \\
+Developed ex US & Selected & Statistics $\to$ + raw sig. & $-0.49$ [$-3.70$, 2.88] & 0.776 & 0.862 & 1.000 \\
+Developed ex US & Selected & B3 $\to$ + log-sig. & $-1.13$ [$-3.33$, 0.99] & 0.316 & 0.862 & 1.000 \\
+Developed ex US & Selected & B3 $\to$ + raw sig. & \textbf{\boldmath $-3.19$ [$-5.82$, $-0.53$]} & 0.018 & 0.092 & 0.647 \\
+\bottomrule
+\end{tabular}

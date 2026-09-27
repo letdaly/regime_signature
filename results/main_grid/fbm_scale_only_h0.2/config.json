@@ -1,0 +1,173 @@
+{
+  "row": "fbm_driven_stochastic_volatility",
+  "simulator": "FBMStochasticVolatilitySimulator (exact Hosking fGn, innovation-correlated price)",
+  "scenario": "scale_only",
+  "hurst": 0.2,
+  "sigma_scale": 1.0,
+  "simulation_substeps": 1,
+  "base_seed": 20260827,
+  "paired_parameter_draws_with": "results/main_grid/heston_scale_only",
+  "replications": 50,
+  "n_paths": [
+    10,
+    10,
+    5
+  ],
+  "n_steps": 5000,
+  "window_size": 50,
+  "p_switch": 0.002,
+  "n_estimators": 200,
+  "signature_kind": "log",
+  "signature_level": 3,
+  "signature_path": "origin_anchored_w_increments",
+  "learners": [
+    "random_forest",
+    "logistic"
+  ],
+  "logistic_c_grid": [
+    0.01,
+    0.1,
+    1.0
+  ],
+  "stationary_initial_variance": true,
+  "stationary_initial_variance_note": "CIR Gamma law; exact only for hurst = 0.5",
+  "evaluate_detector": true,
+  "event_tolerance": 100,
+  "detector_grid": [
+    [
+      0.2,
+      0.4,
+      1
+    ],
+    [
+      0.2,
+      0.4,
+      3
+    ],
+    [
+      0.2,
+      0.4,
+      5
+    ],
+    [
+      0.2,
+      0.5,
+      1
+    ],
+    [
+      0.2,
+      0.5,
+      3
+    ],
+    [
+      0.2,
+      0.5,
+      5
+    ],
+    [
+      0.2,
+      0.6,
+      1
+    ],
+    [
+      0.2,
+      0.6,
+      3
+    ],
+    [
+      0.2,
+      0.6,
+      5
+    ],
+    [
+      0.5,
+      0.4,
+      1
+    ],
+    [
+      0.5,
+      0.4,
+      3
+    ],
+    [
+      0.5,
+      0.4,
+      5
+    ],
+    [
+      0.5,
+      0.5,
+      1
+    ],
+    [
+      0.5,
+      0.5,
+      3
+    ],
+    [
+      0.5,
+      0.5,
+      5
+    ],
+    [
+      0.5,
+      0.6,
+      1
+    ],
+    [
+      0.5,
+      0.6,
+      3
+    ],
+    [
+      0.5,
+      0.6,
+      5
+    ],
+    [
+      1.0,
+      0.4,
+      1
+    ],
+    [
+      1.0,
+      0.4,
+      3
+    ],
+    [
+      1.0,
+      0.4,
+      5
+    ],
+    [
+      1.0,
+      0.5,
+      1
+    ],
+    [
+      1.0,
+      0.5,
+      3
+    ],
+    [
+      1.0,
+      0.5,
+      5
+    ],
+    [
+      1.0,
+      0.6,
+      1
+    ],
+    [
+      1.0,
+      0.6,
+      3
+    ],
+    [
+      1.0,
+      0.6,
+      5
+    ]
+  ]
+}

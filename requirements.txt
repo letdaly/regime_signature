@@ -1,0 +1,18 @@
+# Core experiment environment (pinned to the versions used for the frozen
+# results in results/). Python 3.9.9.
+numpy==2.0.2
+pandas==2.3.3
+scipy==1.13.1
+scikit-learn==1.6.1
+# iisignature: pinned to a GitHub commit, not the PyPI 0.24 wheel.  The PyPI
+# release fails in prepare() ("overflowed buffer in push()") on macOS arm64
+# under both NumPy 2.0.2 and 1.26.4, so log-signatures were unavailable.  The
+# commit below prepares fine; its sig() differs from the wheel only at the
+# 1e-13 level and reproduces the frozen results (see README).  Install with
+# --no-build-isolation because setup.py imports numpy.
+iisignature @ git+https://github.com/bottler/iisignature@447577b55ad07a985c0a39b7c4fbf01ca2b142e5
+joblib==1.5.3
+# Markov-switching benchmark block of the unified grid (experiment_unified_grid.py)
+hmmlearn==0.3.3
+matplotlib==3.9.4
+seaborn==0.13.2

@@ -1,0 +1,40 @@
+{
+  "experiment": "signature_truncation_ablation",
+  "design": "matched_marginal",
+  "levels": [
+    2,
+    3,
+    4
+  ],
+  "logsignature_lengths": {
+    "2": 6,
+    "3": 14,
+    "4": 32
+  },
+  "noise_control": "Statistics plus d_L i.i.d. standard-normal columns per window",
+  "replications": 50,
+  "n_paths": [
+    10,
+    10,
+    5
+  ],
+  "n_steps": 5000,
+  "window_size": 50,
+  "p_switch": 0.002,
+  "n_estimators": 200,
+  "simulation_substeps": 4,
+  "base_seed": 20260828,
+  "paired_parameter_draws_with": "results/main_grid/heston_matched_marginal",
+  "signature_kind": "log",
+  "signature_path": "origin_anchored_w_increments",
+  "learners": [
+    "random_forest",
+    "logistic"
+  ],
+  "logistic_c_grid": [
+    0.01,
+    0.1,
+    1.0
+  ],
+  "evaluate_detector": false
+}

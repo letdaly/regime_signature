@@ -1,0 +1,220 @@
+{
+  "design": "matched_marginal",
+  "grid_dir": "/Users/lyuyang/Desktop/regime_signature_v2/results/unified_grid/matched_marginal",
+  "grid_config": {
+    "design": "matched_marginal",
+    "replications": 50,
+    "n_paths": [
+      10,
+      10,
+      5
+    ],
+    "n_steps": 5000,
+    "window_size": 50,
+    "p_switch": 0.002,
+    "simulation_substeps": 4,
+    "stationary_initial_variance": true,
+    "base_seed": 20260828,
+    "signature_level": 3,
+    "signature_path": "origin_anchored_w_increments",
+    "statistics_columns": [
+      "b1_realized_volatility_long",
+      "b1_realized_volatility_short",
+      "b1_mean_absolute_return",
+      "b1_downside_semivariance",
+      "b1_upside_semivariance",
+      "b1_skewness",
+      "b1_kurtosis",
+      "b2_return_autocorrelation_1",
+      "b2_absolute_return_autocorrelation_1",
+      "b2_squared_return_autocorrelation_1",
+      "b1_maximum_log_drawdown"
+    ],
+    "cells": {
+      "hmm": [
+        "hmm"
+      ],
+      "statistics": [
+        "statistics"
+      ],
+      "statistics_logsig": [
+        "statistics",
+        "logsig"
+      ],
+      "statistics_rawsig": [
+        "statistics",
+        "rawsig"
+      ],
+      "b3": [
+        "b3"
+      ],
+      "b3_logsig": [
+        "b3",
+        "logsig"
+      ],
+      "b3_rawsig": [
+        "b3",
+        "rawsig"
+      ],
+      "logsig": [
+        "logsig"
+      ],
+      "rawsig": [
+        "rawsig"
+      ],
+      "logsig_shuffled": [
+        "logsig_shuffled"
+      ],
+      "rawsig_shuffled": [
+        "rawsig_shuffled"
+      ],
+      "statistics_logsig_shuffled": [
+        "statistics",
+        "logsig_shuffled"
+      ],
+      "statistics_rawsig_shuffled": [
+        "statistics",
+        "rawsig_shuffled"
+      ],
+      "b3_logsig_shuffled": [
+        "b3",
+        "logsig_shuffled"
+      ],
+      "b3_rawsig_shuffled": [
+        "b3",
+        "rawsig_shuffled"
+      ]
+    },
+    "table_cells": [
+      "hmm",
+      "statistics",
+      "statistics_logsig",
+      "statistics_rawsig",
+      "b3",
+      "b3_logsig",
+      "b3_rawsig"
+    ],
+    "learners": [
+      "random_forest",
+      "logistic",
+      "gbm"
+    ],
+    "n_estimators": 200,
+    "rf_depth_grid": [
+      4,
+      6,
+      10
+    ],
+    "logistic_c_grid": [
+      0.01,
+      0.1,
+      1.0
+    ],
+    "gbm_leaf_grid": [
+      7,
+      15,
+      31
+    ],
+    "gbm_learning_rate": 0.05,
+    "gbm_max_iter": 300,
+    "hmm": {
+      "states": 3,
+      "return_scale": 100.0,
+      "min_covar": 1e-06,
+      "max_iter": 200,
+      "matching": "training-window argmax agreement (Hungarian)",
+      "restarts": 5,
+      "persistent_initialization_diagonal": 0.97,
+      "selection": "highest training log-likelihood",
+      "refit_from_archived_paths": true
+    },
+    "save_probabilities": true
+  },
+  "targets_per_1000": [
+    0.5,
+    1.0,
+    2.0,
+    5.0
+  ],
+  "tolerance": 250,
+  "alphas": [
+    0.2,
+    0.5,
+    1.0
+  ],
+  "confirmations": [
+    1,
+    3,
+    5
+  ],
+  "thresholds": [
+    0.34,
+    0.38,
+    0.42,
+    0.46,
+    0.5,
+    0.54,
+    0.58,
+    0.62,
+    0.66,
+    0.7,
+    0.74,
+    0.78,
+    0.82,
+    0.86,
+    0.9,
+    0.9,
+    0.91,
+    0.92,
+    0.93,
+    0.94,
+    0.95,
+    0.96,
+    0.97,
+    0.98,
+    0.99
+  ],
+  "cusum": {
+    "input": "log(r^2 + 1e-12)",
+    "allowances": [
+      0.25,
+      0.5,
+      1.0
+    ],
+    "reference_half_lives": [
+      50,
+      250
+    ],
+    "limits": [
+      2.0,
+      2.443,
+      2.985,
+      3.647,
+      4.455,
+      5.443,
+      6.649,
+      8.123,
+      9.924,
+      12.124,
+      14.811,
+      18.095,
+      22.106,
+      27.006,
+      32.993,
+      40.307,
+      49.242,
+      60.158,
+      73.493,
+      89.785,
+      109.688,
+      134.004,
+      163.709,
+      200.0
+    ],
+    "burn_in": 10,
+    "restart": "sums reset and reference re-anchored to the mean of the last burn_in observations"
+  },
+  "selection": "max validation detection probability subject to validation false alarms <= target; lowest-rate setting if none qualifies",
+  "matching": "state-agnostic within tolerance; state_detection_probability additionally requires the announced state",
+  "scored_observations": "window endpoints from window_size - 1 onward, all detectors"
+}

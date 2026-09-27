@@ -1,0 +1,101 @@
+{
+  "design": "matched_marginal",
+  "replications": 50,
+  "n_paths": [
+    10,
+    10,
+    5
+  ],
+  "n_steps": 5000,
+  "window_size": 50,
+  "p_switch": 0.002,
+  "simulation_substeps": 4,
+  "stationary_initial_variance": true,
+  "base_seed": 20260828,
+  "signature_level": 3,
+  "signature_path": "origin_anchored_w_increments",
+  "statistics_columns": [
+    "b1_realized_volatility_long",
+    "b1_realized_volatility_short",
+    "b1_mean_absolute_return",
+    "b1_downside_semivariance",
+    "b1_upside_semivariance",
+    "b1_skewness",
+    "b1_kurtosis",
+    "b2_return_autocorrelation_1",
+    "b2_absolute_return_autocorrelation_1",
+    "b2_squared_return_autocorrelation_1",
+    "b1_maximum_log_drawdown"
+  ],
+  "cells": {
+    "statistics": [
+      "statistics"
+    ],
+    "statistics_logsig": [
+      "statistics",
+      "logsig"
+    ],
+    "statistics_rawsig": [
+      "statistics",
+      "rawsig"
+    ],
+    "b3": [
+      "b3"
+    ],
+    "b3_logsig": [
+      "b3",
+      "logsig"
+    ],
+    "b3_rawsig": [
+      "b3",
+      "rawsig"
+    ]
+  },
+  "table_cells": [
+    "hmm",
+    "statistics",
+    "statistics_logsig",
+    "statistics_rawsig",
+    "b3",
+    "b3_logsig",
+    "b3_rawsig"
+  ],
+  "learners": [
+    "logistic"
+  ],
+  "n_estimators": 200,
+  "rf_depth_grid": [
+    4,
+    6,
+    10
+  ],
+  "logistic_c_grid": [
+    0.0001,
+    0.001,
+    0.01,
+    0.03,
+    0.1,
+    0.3,
+    1.0,
+    10.0,
+    100.0
+  ],
+  "gbm_leaf_grid": [
+    7,
+    15,
+    31
+  ],
+  "gbm_learning_rate": 0.05,
+  "gbm_max_iter": 300,
+  "hmm": {
+    "states": 3,
+    "return_scale": 100.0,
+    "min_covar": 1e-06,
+    "max_iter": 200,
+    "restarts": 5,
+    "persistent_initialization_diagonal": 0.97,
+    "selection": "highest training log-likelihood",
+    "matching": "training-window argmax agreement (Hungarian)"
+  },
+  "save_probabilities": false
+}

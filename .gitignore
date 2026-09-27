@@ -1,0 +1,20 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.ipynb_checkpoints/
+tmp/
+*.log
+# Reproduction outputs (see README) and LaTeX build files
+reproduced/
+*.aux
+*.fls
+*.fdb_latexmk
+*.out
+*.synctex.gz
+# Per-replication probability and path archives of the unified grid (hundreds of MB per design)
+results/unified_grid/*/probabilities/
+results/unified_grid/*/paths/
+# Raw Kenneth French archives; config.json records the SHA-256 of the frozen
+# snapshot, so drop this line if you want the files themselves in the repo.
+data/french/

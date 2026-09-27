@@ -1,0 +1,30 @@
+{
+  "scenario": "matched_stationary_cir_marginal_different_kappa",
+  "purpose": "fast_kappa_signature_window_stability",
+  "windows": [
+    25,
+    50,
+    100,
+    200
+  ],
+  "replications": 50,
+  "n_paths": [
+    10,
+    3,
+    5
+  ],
+  "n_steps": 5000,
+  "p_switch": 0.002,
+  "min_dwell": 50,
+  "n_estimators": 200,
+  "base_seed": 20260828,
+  "representations": [
+    "statistics",
+    "signature"
+  ],
+  "fast_kappa_regime": 2,
+  "fast_kappa_range": [
+    14.0,
+    18.0
+  ]
+}
