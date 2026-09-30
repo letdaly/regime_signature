@@ -1,35 +1,52 @@
-# Scale or speed? Path signatures in volatility-regime detection
+# Scale or speed? When do path signatures improve volatility-regime forecasts?
 
 Code and replication materials for:
 
-> Yang Lyu and Kiseop Lee, **“Scale or speed? The contingent value of path
-> signatures in volatility-regime detection.”**
+> Yang Lyu and Kiseop Lee, **“Scale or speed? When do path signatures improve
+> volatility-regime forecasts?”**
 
-This repository studies when path signatures add predictive information beyond
-conventional volatility features. Two controlled Heston experiments distinguish
-regimes that differ in variance **scale** from regimes that share the same
-stationary variance law but differ in mean-reversion **speed**. The same feature
-blocks are then evaluated in daily equity-market data.
+This repository studies when path signatures, used as model-free features of return
+paths, improve out-of-sample forecasts of volatility regimes. The forecasting study
+predicts the tercile of next-month realized volatility in United States and
+developed-ex-US equity markets, 2005-2025, and compares machine-learning classifiers
+with and without signatures against conventional benchmarks, including a
+heterogeneous autoregressive (HAR) regression that is also augmented with
+signatures. Two controlled Heston experiments explain the results by separating
+regimes that differ in variance **scale** from regimes that share the same stationary
+variance law but differ in mean-reversion **speed**.
 
 ## Main findings
 
-- Signature gains are larger when regimes differ in speed rather than variance
-  level.
-- Raw signatures paired with logistic regression produce the largest simulated
-  classification gains.
-- Improved pointwise classification does not translate into robust gains in
-  causal change detection after multiplicity correction.
-- In market data, measured signature value depends on the conventional baseline,
-  learner, and market.
-- Sharpe-ratio differences between the evaluated volatility-managed rules are not
-  statistically resolved.
+- The HAR regression is hard to beat: no classifier, with or without signatures,
+  forecasts next-month volatility terciles more accurately.
+- Adding raw signatures to the HAR regression improves United States forecasts
+  (balanced accuracy +2.7 points and a lower ranked probability score, both resolved
+  after Holm correction); adding conventional features does not, and no gain survives
+  correction outside the United States.
+- In the controlled Heston designs, signature gains are larger when regimes differ in
+  speed than in variance level, most of all for raw signatures with a linear learner.
+- Better regime classification does not yield earlier change detection at matched
+  false-alarm rates.
+- No accuracy gain translates into a resolved Sharpe-ratio improvement in a
+  volatility-managed portfolio.
 
 The repository contains the frozen replication-level outputs behind the reported
 tables, along with scripts for rebuilding derived tables and figures.
 
-## Experimental design
+## Study design
 
-Each simulation replication uses independent parameter draws and complete-path
+**Forecasting study.** Daily value-weighted market returns from the Kenneth French Data
+Library, July 1990 to December 2025. On each day the target is the tercile of
+annualized realized volatility over the next 21 trading days. Models are refitted
+annually on an expanding window with a 21-day embargo and selected on the last three
+training years; the out-of-sample period is 2005-2025. Benchmarks are persistence, a
+tercile transition matrix and a log-HAR regression with Gaussian residuals; the HAR
+regression is also augmented with ridge-penalized signature coordinates or, as a
+control, the Statistics features. Forecasts are scored by balanced accuracy, the ranked
+probability score, the logarithmic score and the Brier score, with Diebold-Mariano
+tests, stationary-bootstrap intervals and Holm correction.
+
+**Simulation study.** Each replication uses independent parameter draws and complete-path
 train/validation/test splits. Causal 50-return windows are represented by:
 
 - **Statistics:** 11 conventional return and volatility features;
@@ -62,6 +79,11 @@ held-out test paths.
 ├── experiment_truncation_ablation.py  # signature-level ablation
 ├── experiment_a_monte_carlo.py        # scale-design main-grid rows (Table S10); shared helpers
 ├── experiment_b_monte_carlo.py        # speed-design main-grid rows (Table S10)
+├── market_forecast_evaluation.py      # scores and conventional benchmarks for the market forecasts
+├── market_har_signatures.py           # HAR regression augmented with signatures
+├── market_har_economics.py            # volatility-managed exposure from the HAR forecasts
+├── market_economics_all_rules.py      # exposure results for the remaining signature rules
+├── audit_discretization.py            # Euler discretization audit of Design B
 ├── multiplicity_holm.py               # Holm multiplicity correction
 ├── refit_unified_grid_hmm.py           # HMM-only refit utility
 ├── tests/                              # unit tests
@@ -163,10 +185,17 @@ python experiment_matched_false_alarms.py \
   --jobs 8
 ```
 
-The large per-replication probability and path archives are excluded from ordinary
-Git history. If they are distributed as a release asset, extract them so that the
-`probabilities/` and `paths/` directories sit under each unified-grid design. Without
-those archives, rerun the main grid first and point `--grid-root` to the new output.
+The large per-replication probability and path archives are not in Git history; they
+are attached to release v1.0 as `unified_grid_archives.tar.gz` (SHA-256
+`98478628e236d87600c4ae7c739a0d47b20cac3507fa50fd271b7400e83d4a7c`). Download and
+extract them from the repository root:
+
+```bash
+curl -LO https://github.com/letdaly/regime_signature/releases/download/v1.0/unified_grid_archives.tar.gz
+tar -xzf unified_grid_archives.tar.gz -C results/unified_grid
+```
+
+Without the archives, rerun the main grid first and point `--grid-root` to the new output.
 
 ### Truncation-order ablation
 
@@ -240,6 +269,8 @@ python market_economics_all_rules.py --output-dir reproduced/market_economics_al
 python audit_discretization.py --output-dir reproduced/discretization_audit
 ```
 
+### Forecast evaluation and HAR benchmarks
+
 The probabilistic evaluation of the market forecasts, with climatology, persistence,
 transition and HAR benchmarks, rebuilds the market folds without refitting any classifier:
 
@@ -284,9 +315,11 @@ table fragments and the year-by-year B3 figure.
   definition.
 - No test observation is used for feature, learner, hyperparameter, or detector
   selection.
-- Large probability/path archives are data products, not source code, and should
-  be distributed through a versioned GitHub Release rather than committed to Git
-  history.
+- Large probability/path archives are data products rather than source code and are
+  distributed through release v1.0 instead of Git history.
+- The Kenneth French archives are not redistributed. The library revises its files,
+  so a fresh download may not match the recorded hashes; the market scripts then stop
+  rather than silently use different data.
 
 ## Citation
 
@@ -295,8 +328,8 @@ used for your analysis. A `CITATION.cff` file and final bibliographic details wi
 be added with the archival release.
 
 ```text
-Lyu, Yang, and Kiseop Lee. “Scale or speed? The contingent value of path
-signatures in volatility-regime detection.”
+Lyu, Yang, and Kiseop Lee. “Scale or speed? When do path signatures improve
+volatility-regime forecasts?”
 ```
 
 ## License

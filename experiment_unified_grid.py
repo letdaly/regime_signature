@@ -1,6 +1,6 @@
 """Unified comparison grid behind the paper's simulation results.
 
-One protocol for every cell of the paper's Table 1: 50 paired replications,
+One protocol for every cell of the paper's simulation table: 50 paired replications,
 10 / 10 / 5 training / validation / test paths of 5,000 observations, 50-return
 causal windows labelled by their endpoint state, level-3 signatures on the
 origin-anchored three-channel path.  Within a replication the paths are

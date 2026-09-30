@@ -1,12 +1,12 @@
-"""Holm-corrected multiplicity audit of the contrasts the letter reports.
+"""Holm-corrected multiplicity audit of the contrasts the paper reports.
 
 Every interval in the paper is a nominal 95% interval for one contrast at a
-time, and the letter reports many of them: 24 paired augmentation contrasts in
-the classification table, 32 in the detection study (four false-alarm budgets),
-and 8 in the market table.  A referee who reads "resolved" as a claim about the
-whole table is entitled to a correction, and the conclusion that signature
-gains appear at 5 false alarms per 1,000 but not at 1 is exactly the kind of
-statement that multiplicity can manufacture.
+time, and the paper reports many of them: 24 paired augmentation contrasts in
+the simulation table, 32 in the detection study (four false-alarm budgets),
+and 8 in the market accuracy table.  Reading "resolved" as a claim about a
+whole table requires a correction for multiplicity, which matters most for the
+detection contrasts, where a gain at one budget but not at another could arise
+by chance.
 
 This script recomputes each contrast from the frozen replication-level outputs
 and applies the Holm step-down correction inside three families -- the three
@@ -18,7 +18,7 @@ Families:
 
 * ``classification``: two designs x three learners x four augmentations, paired
   t-tests on the 50 within-replication balanced-accuracy differences, the same
-  differences that produce the Student-t intervals of the main table.
+  differences that produce the Student-t intervals of the simulation table.
 * ``detection``: two designs x four false-alarm budgets x four augmentations,
   paired t-tests on the within-replication detection-probability differences of
   the validation-selected learner.  Conditional-delay contrasts are left out
@@ -41,7 +41,7 @@ from scipy.stats import t as student_t
 DESIGNS = (("scale_only", "Design A"), ("matched_marginal", "Design B"))
 MARKETS = (("us", "United States"), ("developed_ex_us", "Developed ex US"))
 LEARNERS = ("logistic", "random_forest", "gbm")
-# The four augmentation contrasts the letter reports for every table.
+# The four augmentation contrasts the paper reports for every table.
 AUGMENTATIONS = (
     ("statistics_logsig", "statistics"),
     ("statistics_rawsig", "statistics"),

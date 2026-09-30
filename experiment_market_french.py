@@ -35,8 +35,8 @@ anything.  Commit that file, then run the same command without ``--freeze``.
 
 Outputs, under ``results/market_french/<market>/``: ``config.json``,
 ``folds/fold_<year>.npz`` (one per test year, so an interrupted run resumes),
-``folds.csv``, ``cells.csv``, ``summary.csv`` (Table 1) and ``economics.csv``
-(Table 2).
+``folds.csv``, ``cells.csv``, ``summary.csv`` (accuracy table) and ``economics.csv``
+(volatility-managed exposure table).
 """
 
 import argparse
@@ -113,7 +113,7 @@ BASE_OF = {
     "b3_logsig": "b3",
     "b3_rawsig": "b3",
 }
-# Exposure rules of Table 2, in printing order (buy-and-hold is added there).
+# Exposure rules of the economic table, in printing order (buy-and-hold is added there).
 ECONOMIC_CELLS = ("hmm", "statistics", "statistics_logsig", "b3_rawsig")
 SHARPE_BENCHMARK_CELL = "statistics"
 
@@ -855,7 +855,7 @@ def fold_table(metadata: Sequence[Dict[str, object]]) -> pd.DataFrame:
 def accuracy_table(
     pooled: Dict[str, object], cells: Sequence[str], block: float, resamples: int, seed: int
 ) -> pd.DataFrame:
-    """Table 1 of the market section: pooled out-of-sample BA and paired gains."""
+    """Market accuracy table: pooled out-of-sample BA and paired gains."""
 
     labels = pooled["labels"]
     predictions = {
@@ -893,7 +893,7 @@ def economics_table(
     resamples: int,
     seed: int,
 ) -> pd.DataFrame:
-    """Table 2 of the market section: volatility-managed exposure to the market."""
+    """Economic table: volatility-managed exposure to the market."""
 
     excess = pooled["excess_next"]
     strategies = {"buy_and_hold": (excess, None)}
