@@ -408,6 +408,51 @@ Representation & Logit & RF & GBM \\
     )
 
 
+# ---------------------------------------------------------------------------
+# Table S12: volatility-managed results for the remaining signature rules
+# ---------------------------------------------------------------------------
+
+
+def remaining_rules_table():
+    economics = pd.read_csv(RESULTS / "market_economics_all_rules" / "economics.csv")
+    rules = (("statistics", "Statistics"), ("statistics_rawsig", "Statistics + raw sig."), ("b3_logsig", "B3 + log-sig."))
+    lines = []
+    for panel, (market, label) in zip("AB", (("us", "United States"), ("developed_ex_us", "Developed markets excluding the United States"))):
+        lines.append(r"\multicolumn{7}{@{}l}{\textit{Panel " + panel + ". " + label + r"}} \\")
+        rows = economics[economics["market"] == market].set_index("rule")
+        for rule, rule_label in rules:
+            row = rows.loc[rule]
+            lines.append(
+                " & ".join(
+                    [
+                        rule_label,
+                        num(row["mean_annualized_pct"]),
+                        num(row["volatility_annualized_pct"]),
+                        num(row["sharpe"], 3),
+                        num(row["max_drawdown_pct"], 1),
+                        num(row["turnover"], 3),
+                        "--" if rule == "statistics" else pval(row["p_value"]),
+                    ]
+                )
+                + r" \\"
+            )
+        lines.append(r"\addlinespace")
+    write(
+        "table_remaining_rules.tex",
+        r"""
+\begin{tabular}{@{}lcccccc@{}}
+\toprule
+Exposure rule & Mean & Vol. & Sharpe & Max DD & Turnover & $p$ \\
+\midrule
+"""
+        + "\n".join(lines[:-1])
+        + r"""
+\bottomrule
+\end{tabular}
+""",
+    )
+
+
 if __name__ == "__main__":
     holm_tables()
     penalty_table()
@@ -416,3 +461,4 @@ if __name__ == "__main__":
     detection_tables()
     age_table()
     market_learner_table()
+    remaining_rules_table()

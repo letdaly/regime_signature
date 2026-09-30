@@ -14,9 +14,10 @@
 - Fixed classifier: Random Forest, 200 trees, maximum depth 6, balanced class
   weights.
 - Simulation uses four Euler substeps per observed return and stationary CIR
-  initialization. A numerical audit at representative parameters found a
-  1.3% spread in simulated stationary variance across the three `kappa`
-  values, versus about 3% with one Euler step.
+  initialization. The discretization audit in `results/discretization_audit`
+  finds that the stationary variance of V differs across the three `kappa`
+  values by about 1 percentage point with four substeps, versus about 3 points
+  with one Euler step.
 - Pairing: every representation uses the exact same paths and labels in each
   replication.
 - Detector settings are selected on validation paths only from a fixed grid of

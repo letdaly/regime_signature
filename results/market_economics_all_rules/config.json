@@ -1,0 +1,20 @@
+{
+  "experiment": "market_economics_all_rules",
+  "source": "results/market_french",
+  "markets": [
+    "us",
+    "developed_ex_us"
+  ],
+  "published_rules": [
+    "hmm",
+    "statistics",
+    "statistics_logsig",
+    "b3_rawsig"
+  ],
+  "added_rules": [
+    "statistics_rawsig",
+    "b3_logsig"
+  ],
+  "sharpe_benchmark": "statistics",
+  "published_rows_reproduced": true
+}

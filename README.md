@@ -85,7 +85,9 @@ results/unified_grid_logitc/
 results/main_grid/truncation_{scale_only,matched_marginal}/
 results/main_grid/heston_{scale_only,matched_marginal}/
 results/market_french/
+results/market_economics_all_rules/
 results/multiplicity/
+results/discretization_audit/
 ```
 
 Each result directory contains a configuration file and a local README describing
@@ -224,6 +226,17 @@ refitting:
 python multiplicity_holm.py --output-dir reproduced/multiplicity
 ```
 
+### Remaining signature rules and discretization audit
+
+The volatility-managed results for the two signature rules that were not
+prespecified are rebuilt from the stored out-of-sample weights, and the Euler
+discretization of the Design B variance process is audited by simulation:
+
+```bash
+python market_economics_all_rules.py --output-dir reproduced/market_economics_all_rules
+python audit_discretization.py --output-dir reproduced/discretization_audit
+```
+
 ### Supplementary tables and figure
 
 ```bash
@@ -232,7 +245,7 @@ python paper/supplement/build_b3_figure.py
 ```
 
 These scripts read the frozen outputs under `results/` and regenerate the LaTeX
-table fragments and Figure S1.
+table fragments and the year-by-year B3 figure.
 
 ## Data and output provenance
 

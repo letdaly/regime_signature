@@ -1,0 +1,26 @@
+{
+  "experiment": "discretization_audit",
+  "design": "matched_marginal (Design B)",
+  "theta": 0.08,
+  "q": 0.045,
+  "kappas": [
+    1.0,
+    5.25,
+    16.0
+  ],
+  "substeps": [
+    1,
+    4
+  ],
+  "dt": 0.003968253968253968,
+  "paths": 100000,
+  "burn_in_observations": 2520,
+  "averaged_observations": 2520,
+  "batches": 50,
+  "seed": 20260930,
+  "initial_law": "exact stationary Gamma(2 theta / q, q / 2)",
+  "variance_spread_pp": {
+    "1": 2.956228249653292,
+    "4": 0.9570104068403862
+  }
+}
