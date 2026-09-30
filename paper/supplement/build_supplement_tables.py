@@ -453,6 +453,64 @@ Exposure rule & Mean & Vol. & Sharpe & Max DD & Turnover & $p$ \\
     )
 
 
+# ---------------------------------------------------------------------------
+# Table S13: every market forecast under all four measures
+# ---------------------------------------------------------------------------
+
+
+def score_table():
+    levels = pd.concat(
+        [
+            pd.read_csv(RESULTS / "market_forecast_evaluation" / "levels.csv"),
+            pd.read_csv(RESULTS / "market_har_signatures" / "levels.csv").query("model != 'har'"),
+        ]
+    ).set_index(["market", "model"])
+    groups = (
+        ("Benchmarks", (("persistence", "Persistence"), ("transition", "Transition"), ("har", "HAR"))),
+        ("HAR augmented", (("har_statistics", "HAR + Statistics"), ("har_logsig", "HAR + log-sig."),
+                           ("har_rawsig", "HAR + raw sig."))),
+        ("Classifiers", (("hmm", "HMM probability block"),) + tuple(CELL_LABELS.items())),
+    )
+    measures = (("ba_pct", 1.0, 2, max), ("rps", 100.0, 2, min), ("log_score", 1.0, 3, min), ("brier", 100.0, 2, min))
+    markets = ("us", "developed_ex_us")
+    models = [model for _, rows in groups for model, _ in rows]
+    best = {}
+    for market in markets:
+        for column, scale, _, pick in measures:
+            values = [scale * levels.loc[(market, model), column] for model in models]
+            best[(market, column)] = pick(v for v in values if np.isfinite(v))
+    lines = []
+    for group, rows in groups:
+        lines.append(r"\multicolumn{9}{@{}l}{\textit{" + group + r"}} \\")
+        for model, label in rows:
+            cells = [label]
+            for market in markets:
+                for column, scale, digits, _ in measures:
+                    value = scale * levels.loc[(market, model), column]
+                    text = num(value, digits)
+                    if np.isfinite(value) and np.isclose(value, best[(market, column)]):
+                        text = r"\textbf{" + text + "}"
+                    cells.append(text)
+            lines.append(" & ".join(cells) + r" \\")
+        lines.append(r"\addlinespace")
+    write(
+        "table_all_scores.tex",
+        r"""
+\begin{tabular}{@{}lcccccccc@{}}
+\toprule
+ & \multicolumn{4}{c}{United States} & \multicolumn{4}{c}{Developed ex US} \\
+\cmidrule(lr){2-5}\cmidrule(l){6-9}
+Forecast & BA (\%) & RPS & Log & Brier & BA (\%) & RPS & Log & Brier \\
+\midrule
+"""
+        + "\n".join(lines[:-1])
+        + r"""
+\bottomrule
+\end{tabular}
+""",
+    )
+
+
 if __name__ == "__main__":
     holm_tables()
     penalty_table()
@@ -462,3 +520,4 @@ if __name__ == "__main__":
     age_table()
     market_learner_table()
     remaining_rules_table()
+    score_table()

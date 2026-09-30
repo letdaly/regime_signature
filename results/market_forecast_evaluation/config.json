@@ -1,0 +1,36 @@
+{
+  "experiment": "market_forecast_evaluation",
+  "source": "results/market_french",
+  "markets": [
+    "us",
+    "developed_ex_us"
+  ],
+  "benchmarks": [
+    "climatology",
+    "persistence",
+    "transition",
+    "har"
+  ],
+  "stored_representations": [
+    "hmm",
+    "statistics",
+    "statistics_logsig",
+    "statistics_rawsig",
+    "b3",
+    "b3_logsig",
+    "b3_rawsig"
+  ],
+  "scores": [
+    "rps",
+    "log_score",
+    "brier"
+  ],
+  "primary_score": "rps",
+  "balanced_accuracy_versus_har": "stationary-bootstrap gain, as in the market study",
+  "hac_bandwidth": 21,
+  "bootstrap_mean_block": 21,
+  "bootstrap_resamples": 2000,
+  "har_one_day_floor_quantile": 0.01,
+  "transition_smoothing": "Laplace (+1)",
+  "rebuilt_dates_and_labels_match_stored_folds": true
+}

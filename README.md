@@ -86,6 +86,9 @@ results/main_grid/truncation_{scale_only,matched_marginal}/
 results/main_grid/heston_{scale_only,matched_marginal}/
 results/market_french/
 results/market_economics_all_rules/
+results/market_forecast_evaluation/
+results/market_har_signatures/
+results/market_har_economics/
 results/multiplicity/
 results/discretization_audit/
 ```
@@ -236,6 +239,30 @@ discretization of the Design B variance process is audited by simulation:
 python market_economics_all_rules.py --output-dir reproduced/market_economics_all_rules
 python audit_discretization.py --output-dir reproduced/discretization_audit
 ```
+
+The probabilistic evaluation of the market forecasts, with climatology, persistence,
+transition and HAR benchmarks, rebuilds the market folds without refitting any classifier:
+
+```bash
+python market_forecast_evaluation.py --output-dir reproduced/market_forecast_evaluation
+```
+
+The HAR benchmark augmented with signature coordinates (and, as a control, with the
+Statistics features) recomputes the market features but refits no classifier:
+
+```bash
+python market_har_signatures.py --output-dir reproduced/market_har_signatures
+```
+
+The same volatility-managed exposure rule, driven by the plain and augmented HAR forecasts:
+
+```bash
+python market_har_economics.py --output-dir reproduced/market_har_economics
+```
+
+These three scripts rebuild the market windows from the frozen Kenneth French
+archives in `data/french` (see the market study above) and stop if the archives do
+not match the SHA-256 hashes recorded in `results/market_french/<market>/config.json`.
 
 ### Supplementary tables and figure
 

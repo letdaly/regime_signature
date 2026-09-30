@@ -1,0 +1,15 @@
+{
+  "experiment": "market_har_economics",
+  "forecasts": "results/market_har_signatures",
+  "rules": [
+    "har",
+    "har_statistics",
+    "har_logsig",
+    "har_rawsig"
+  ],
+  "sharpe_benchmark": "har",
+  "exposure_rule": "w_t = c / sigma_hat_t^2, capped at 2.0",
+  "scale_from": "in-sample probabilities on the training window",
+  "holm_family": "six HAR augmentations across the two markets",
+  "stored_forecasts_reproduced": true
+}

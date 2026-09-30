@@ -1,0 +1,31 @@
+{
+  "experiment": "market_har_signatures",
+  "source": "results/market_french",
+  "markets": [
+    "us",
+    "developed_ex_us"
+  ],
+  "extra_blocks": {
+    "statistics": 11,
+    "logsig": 14,
+    "rawsig": 39
+  },
+  "penalties": [
+    0.1,
+    1.0,
+    10.0,
+    100.0,
+    1000.0,
+    10000.0,
+    100000.0,
+    null
+  ],
+  "penalty_selection": "validation-year mean RPS; ties to the larger penalty; None = plain HAR",
+  "standardization": "extra predictors standardized on the fitting window",
+  "primary_score": "rps",
+  "hac_bandwidth": 21,
+  "bootstrap_mean_block": 21,
+  "bootstrap_resamples": 2000,
+  "plain_har_matches_benchmark": true,
+  "rebuilt_dates_and_labels_match_stored_folds": true
+}
