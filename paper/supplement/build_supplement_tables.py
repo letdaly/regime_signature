@@ -511,6 +511,66 @@ Forecast & BA (\%) & RPS & Log & Brier & BA (\%) & RPS & Log & Brier \\
     )
 
 
+# ---------------------------------------------------------------------------
+# Table S14: HAR augmentation tests under all four forecast scores
+# ---------------------------------------------------------------------------
+
+
+def har_pvalue_table():
+    contrasts = pd.read_csv(RESULTS / "market_har_signatures" / "contrasts.csv")
+    expected = pd.MultiIndex.from_product(
+        [
+            ("us", "developed_ex_us"),
+            ("har_statistics", "har_logsig", "har_rawsig"),
+            ("balanced_accuracy", "rps", "log_score", "brier"),
+        ],
+        names=["market", "model", "score"],
+    )
+    contrasts = contrasts.set_index(["market", "model", "score"])
+    if not contrasts.index.is_unique or set(contrasts.index) != set(expected):
+        raise ValueError("HAR contrast table must contain exactly six contrasts for each of four scores")
+
+    def har_pval(value):
+        return "$<$0.0001" if value < 0.0001 else "{:.4f}".format(value)
+
+    score_names = (
+        ("balanced_accuracy", "BA"),
+        ("rps", "RPS"),
+        ("log_score", "Log score"),
+        ("brier", "Brier score"),
+    )
+    model_names = (
+        ("har_statistics", "HAR + Statistics"),
+        ("har_logsig", "HAR + log-sig."),
+        ("har_rawsig", "HAR + raw sig."),
+    )
+    lines = []
+    for market, panel in (("us", "United States"), ("developed_ex_us", "Developed ex US")):
+        lines.append(r"\multicolumn{4}{@{}l}{\textit{" + panel + r"}} \\")
+        for model, model_name in model_names:
+            for i, (score, score_name) in enumerate(score_names):
+                row = contrasts.loc[(market, model, score)]
+                adjusted = har_pval(row["p_holm"])
+                if row["p_holm"] < 0.05:
+                    adjusted = r"\textbf{" + adjusted + "}"
+                cells = [model_name if i == 0 else "", score_name, har_pval(row["p_value"]), adjusted]
+                lines.append(" & ".join(cells) + r" \\")
+            lines.append(r"\addlinespace")
+    write(
+        "table_har_pvalues.tex",
+        r"""\begin{tabular}{@{}llcc@{}}
+\toprule
+Augmentation & Score & Raw $p$ & Holm-adjusted $p$ \\
+\midrule
+"""
+        + "\n".join(lines[:-1])
+        + r"""
+\bottomrule
+\end{tabular}
+""",
+    )
+
+
 if __name__ == "__main__":
     holm_tables()
     penalty_table()
@@ -521,3 +581,4 @@ if __name__ == "__main__":
     market_learner_table()
     remaining_rules_table()
     score_table()
+    har_pvalue_table()

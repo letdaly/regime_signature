@@ -1,0 +1,37 @@
+\begin{tabular}{@{}llcc@{}}
+\toprule
+Augmentation & Score & Raw $p$ & Holm-adjusted $p$ \\
+\midrule
+\multicolumn{4}{@{}l}{\textit{United States}} \\
+HAR + Statistics & BA & 0.6240 & 1.0000 \\
+ & RPS & 0.4351 & 0.8703 \\
+ & Log score & 0.4296 & 1.0000 \\
+ & Brier score & 0.5006 & 1.0000 \\
+\addlinespace
+HAR + log-sig. & BA & 0.0165 & 0.0825 \\
+ & RPS & 0.0201 & 0.0972 \\
+ & Log score & 0.1956 & 0.7824 \\
+ & Brier score & 0.0129 & 0.0643 \\
+\addlinespace
+HAR + raw sig. & BA & 0.0065 & \textbf{0.0390} \\
+ & RPS & 0.0008 & \textbf{0.0045} \\
+ & Log score & 0.0155 & 0.0930 \\
+ & Brier score & 0.0010 & \textbf{0.0059} \\
+\addlinespace
+\multicolumn{4}{@{}l}{\textit{Developed ex US}} \\
+HAR + Statistics & BA & 0.1160 & 0.4640 \\
+ & RPS & 0.5708 & 0.8703 \\
+ & Log score & 0.4047 & 1.0000 \\
+ & Brier score & 0.5650 & 1.0000 \\
+\addlinespace
+HAR + log-sig. & BA & 0.7070 & 1.0000 \\
+ & RPS & 0.0194 & 0.0972 \\
+ & Log score & 0.0241 & 0.1207 \\
+ & Brier score & 0.0345 & 0.1381 \\
+\addlinespace
+HAR + raw sig. & BA & 0.2775 & 0.8325 \\
+ & RPS & 0.2656 & 0.7968 \\
+ & Log score & 0.3976 & 1.0000 \\
+ & Brier score & 0.2485 & 0.7455 \\
+\bottomrule
+\end{tabular}
